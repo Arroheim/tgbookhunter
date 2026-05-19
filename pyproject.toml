@@ -1,0 +1,79 @@
+[project]
+name = "tgbookhunter"
+version = "0.1.0"
+description = "CLI tool for downloading books (PDF, DJVU, MOBI) from Telegram channels"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "telethon>=1.33.1",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    "click>=8.1.7",
+    "rich>=13.7.0",
+    "python-dotenv>=1.0.0",
+    "aiofiles>=23.2.1",
+    "loguru>=0.7.2",
+]
+
+
+[project.scripts]
+tgbookhunter = "tgbookhunter.presentation.cli.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+src = ["src"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "SIM", # flake8-simplify
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["tgbookhunter"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+mypy_path = "src"
+
+[[tool.mypy.overrides]]
+module = "telethon.*"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+asyncio_mode = "auto"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.1.9",
+    "mypy>=1.8.0",
+    "pytest>=7.4.3",
+    "pytest-asyncio>=0.23.2",
+    "pytest-cov>=4.1.0",
+    "pre-commit>=3.6.0",
+]
