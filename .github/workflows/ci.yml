@@ -41,3 +41,7 @@ jobs:
         run: uv sync --group dev
       - name: Run tests
         run: uv run pytest --cov=src --cov-report=term-missing
+        env:
+          TG_API_ID: "12345"
+          TG_API_HASH: "ci_test_hash"
+          TG_PHONE: "+1234567890"

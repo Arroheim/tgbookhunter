@@ -4,7 +4,7 @@
 
 A CLI tool for automatically downloading books from Telegram channels, with a beautiful terminal UI and detailed logging.
 
-![CI](https://github.com/stanislav-seredkin/tgbookhunter/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/Arroheim/tgbookhunter/actions/workflows/ci.yml/badge.svg)
 ![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
