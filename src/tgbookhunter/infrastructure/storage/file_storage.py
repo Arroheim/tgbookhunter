@@ -127,9 +127,7 @@ class BookDownloadService:
                 task.fail(str(e))
 
                 # Clean up temp file if exists
-                if "tmp_path" in locals() and await self._storage.file_exists(
-                    tmp_path
-                ):
+                if "tmp_path" in locals() and await self._storage.file_exists(tmp_path):
                     await self._storage.remove_file(tmp_path)
 
             if progress_callback:
@@ -200,8 +198,7 @@ class BookDownloadService:
 
         # Create tasks for all books
         tasks = [
-            self.download_book(book, download_dir, progress_callback)
-            for book in books
+            self.download_book(book, download_dir, progress_callback) for book in books
         ]
 
         # Execute all downloads concurrently (limited by semaphore)
@@ -211,9 +208,6 @@ class BookDownloadService:
         completed = sum(1 for r in results if r.status == "completed")
         failed = sum(1 for r in results if r.status == "failed")
 
-        logger.info(
-            f"Download complete: {completed} succeeded, "
-            f"{failed} failed"
-        )
+        logger.info(f"Download complete: {completed} succeeded, {failed} failed")
 
         return list(results)

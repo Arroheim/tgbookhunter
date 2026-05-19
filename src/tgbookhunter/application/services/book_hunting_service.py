@@ -195,4 +195,3 @@ class BookHuntingService:
 
         logger.info(f"Listed {len(books)} books in @{channel_name}")
         return books
-

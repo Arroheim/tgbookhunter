@@ -37,9 +37,7 @@ def compute_download_stats(download_tasks: list[DownloadTask]) -> dict[str, int]
     """Calculate download statistics from completed tasks."""
     completed = sum(1 for t in download_tasks if t.status == "completed")
     failed = sum(1 for t in download_tasks if t.status == "failed")
-    already_exists = sum(
-        1 for t in download_tasks if t.status == "already_exists"
-    )
+    already_exists = sum(1 for t in download_tasks if t.status == "already_exists")
     return {
         "completed": completed,
         "failed": failed,
@@ -183,9 +181,7 @@ def download(
             table.add_row("● Cache:", "Disabled" if no_cache else "Enabled")
 
             console.print()
-            console.rule(
-                "📚 Book Hunter Configuration", style="blue", align="left"
-            )
+            console.rule("📚 Book Hunter Configuration", style="blue", align="left")
             console.print()
             console.print(table)
             console.print()
@@ -300,9 +296,7 @@ def list_books(channel: str, formats: tuple[str, ...]) -> None:
                 channel, formats_list
             )
 
-            with console.status(
-                "[bold blue]Searching for books...", spinner="dots2"
-            ):
+            with console.status("[bold blue]Searching for books...", spinner="dots2"):
                 books = await hunting_service.list_books(channel, formats_list)
 
             if not books:
@@ -323,9 +317,7 @@ def list_books(channel: str, formats: tuple[str, ...]) -> None:
 
             for i, book in enumerate(books, 1):
                 desc = (book.description or "")[:100] + (
-                    "..."
-                    if book.description and len(book.description) > 100
-                    else ""
+                    "..." if book.description and len(book.description) > 100 else ""
                 )
                 table.add_row(
                     str(i),

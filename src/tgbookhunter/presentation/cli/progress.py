@@ -173,11 +173,16 @@ class BookHunterProgress:
                 pass
 
         # Update overall progress
-        advance = 1 if task.status in [
-            "completed",
-            "failed",
-            "already_exists",
-        ] else 0
+        advance = (
+            1
+            if task.status
+            in [
+                "completed",
+                "failed",
+                "already_exists",
+            ]
+            else 0
+        )
         self._overall_progress.update(
             self._overall_task_id,
             advance=advance,

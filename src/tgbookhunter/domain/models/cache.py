@@ -108,9 +108,7 @@ class ScanCache:
                 else None
             ),
             total_messages_scanned=data.get("total_messages_scanned", 0),
-            books=[
-                CachedBook.from_dict(b) for b in data.get("books", [])
-            ],
+            books=[CachedBook.from_dict(b) for b in data.get("books", [])],
         )
 
     def to_dict(self) -> dict[str, Any]:
