@@ -11,19 +11,24 @@ from tgbookhunter.config.settings import Settings
 class TestSettings:
     """Tests for Settings model."""
 
-    def test_settings_require_api_id(self) -> None:
+    def test_settings_require_api_id(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """Test that TG_API_ID is required."""
-        # Create settings without .env file
+        monkeypatch.delenv("TG_API_ID", raising=False)
+        monkeypatch.delenv("TG_API_HASH", raising=False)
+        monkeypatch.delenv("TG_PHONE", raising=False)
         with pytest.raises(ValidationError):
             Settings(_env_file=None)
 
-    def test_settings_require_api_hash(self) -> None:
+    def test_settings_require_api_hash(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """Test that TG_API_HASH is required."""
+        monkeypatch.delenv("TG_API_HASH", raising=False)
+        monkeypatch.delenv("TG_PHONE", raising=False)
         with pytest.raises(ValidationError):
             Settings(tg_api_id=12345, _env_file=None)
 
-    def test_settings_require_phone(self) -> None:
+    def test_settings_require_phone(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """Test that TG_PHONE is required."""
+        monkeypatch.delenv("TG_PHONE", raising=False)
         with pytest.raises(ValidationError):
             Settings(tg_api_id=12345, tg_api_hash="test_hash", _env_file=None)
 
